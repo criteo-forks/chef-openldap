@@ -6,7 +6,6 @@ description       'Installs and configures OpenLDAP (slapd) an open source imple
 version           '6.0.13'
 source_url        'https://github.com/sous-chefs/openldap'
 issues_url        'https://github.com/sous-chefs/openldap/issues'
-chef_version      '>= 15.3'
 
 supports 'amazon'
 supports 'centos'
