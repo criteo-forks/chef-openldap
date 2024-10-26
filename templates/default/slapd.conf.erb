@@ -41,6 +41,9 @@ moduleload       <%= mod %>
 <% if node['openldap']['slapd_type'] == "provider" -%>
 moduleload       syncprov
 <% end -%>
+<% if node['openldap']['monitor_db'] -%>
+moduleload       back_monitor
+<% end -%>
 
 # The tool-threads parameter sets the actual amount of cpu's that is used for
 # indexing.
@@ -137,3 +140,14 @@ access to *
         by dn="<%= node['openldap']['syncrepl_cn'] %>,<%= node['openldap']['basedn'] %>" read
 <% end -%>
         by * read
+
+<% if node['openldap']['monitor_db'] -%>
+######################################################################
+# Specific Directives for monitoring database , of type 'monitoring':
+# Database specific directives apply to this databasse until another
+# 'database' directive occurs
+database        monitor
+
+rootdn          <%= node['openldap']['monitor_db']['rootdn'] %>
+rootpw          <%= node['openldap']['monitor_db']['rootpw'] %>
+<% end -%>
